@@ -1,0 +1,27 @@
+﻿@model ViewImageViewModel
+
+@if (!Model.IsAuthorized)
+{
+    <div class="row">
+        <div class="col-md-6 offset-md-3 bg-light p-4 rounded shadow">
+            <h4>Please enter the password for this image:</h4>
+            @if (!string.IsNullOrEmpty(Model.ErrorMessage))
+            {
+                <div class="alert alert-danger">@Model.ErrorMessage</div>
+            }
+            <form method="post">
+                <input type="hidden" name="id" value="@Model.Image.Id" />
+                <input type="text" class="form-control" placeholder="Password" name="password" />
+                <br />
+                <button class="btn btn-primary w-100">Submit</button>
+            </form>
+        </div>
+    </div>
+}
+else
+{
+    <div class="text-center">
+        <img src="/Images/@Model.Image.ImagePath" class="img-fluid rounded shadow" />
+        <p class="mt-3">Views: @Model.ViewCount</p>
+    </div>
+}
